@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Development principles, patterns and practices</title>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<link rel="stylesheet" href="libs/reveal_js/css/reveal.css">
+		<link rel="stylesheet" href="libs/reveal_js/css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="libs/reveal_js/lib/css/zenburn.css">
+		<script>
+			document.write( '<link rel="stylesheet" href="libs/reveal_js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+		<!--[if lt IE 9]>
+		<script src="libs/reveal_js/lib/js/html5shiv.js"></script>
+		<![endif]-->
+		<style type="text/css">
+			/*.slides {
+				top: 45% !important; 
+			}*/
+
+			.reveal ol {
+				list-style: none;
+			}
+
+			.reveal blockquote {
+				margin: 25px auto;
+			}
+
+			.reveal p {
+				margin-bottom: 30px;
+			}
+
+			.reveal section img {
+				border: 4px solid rgb(83, 83, 83);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Development principles, patterns and practices</h1>
+					<h3>- from good to great -</h3>
+					<p>	
+						<small><a href="http://bit.ly/RO2EV4">http://bit.ly/RO2EV4</a> /<a href="http://anders-jonsson.net">Anders Jönsson</a></small>
+					</p>
+				</section>
+				<section>
+					<h2>This presentation will be like:</h2>
+					<img src="images/gottoblandat.jpg">
+					<p><small>(We have <span id="number-of-sections"></span> pieces to eat)</small></p>
+				</section>	
+				<section>
+					<h2>Hopefully it can act as a catalyst for further discussions within the team</h2>
+				</section>	
+				<section data-state="big">
+					<h2>Agenda</h2>
+					<ol>
+						<li>Introduction</li>
+						<li>Pair programming</li>
+						<li>
+							TDD/BDD
+							<ol>
+								<li>Concepts</li>
+								<li>Unit/integration/aac tests</li>
+							</ol>
+						</li>
+						<li>TestText</li>
+						<li>
+							Coding
+							<ol>
+								<li>Patterns and principles</li>
+								<li>Guidelines</li>
+								<li>Code sharing</li>
+								<li>Static code analysis</li>
+							</ol>
+						</li>
+						<li>
+							Continues integration
+						</li>
+						<li>Wrap up</li>
+						<li><br><small>Ask questions whenever you want</small></li>
+					</ol>		
+				</section>			
+				<section>
+					<h2>Introduction</h2>
+					<p>Why?</p>
+					
+				</section>
+				<section>
+					<h1>Pair programming</h1>
+					<img src="images/pair_programming.jpg">
+					<blockquote>Pair Programming: an idea from the depths of hell that actually works surprisingly well." -- Animesh Karna	</blockquote>
+				</section>
+				<section>
+					<h2>Higher quality and more fun</h2>
+					<small>(Research on pair programming, Making Software by Oram & Wilson)</small>
+				</section>
+				<section>
+					<h2>Roles</h2>
+					<h3 style="margin-top: 50px;">Driver</h3>
+					<p>writes the code</p>
+					
+					<h3 style="margin-top: 50px;">Navigator</h3>
+					<p>keeps track of where we are and where we are heading</p>
+				</section>
+				<section>
+					<h2>You should</h2>
+					<ul>
+						<li>Switch roles often</li>
+						<li>Stop and reflect on the problem</li>
+						<li>Research</li>
+						<li>Discuss different way of solving the problem</li>
+						<li>Switch pair every day (keep one as story responsible)</li>
+					</ul>
+				</section>
+				<section>
+					<h2>You should NOT</h2>
+					<ul>
+						<li>Pick on the drivers code while writing</li>
+						<li>Grabbing the keyboard from the driver</li>
+						<li>Tweeting, mailing, texting, etc while you are paring</li>
+					</ul>
+				</section>
+				<section>
+					<h2>When to pair</h2>
+					<p>Mindset: all the code that goes in to production</p>
+					<p>Optional to pair on trivial tasks (e.g. updating documentations, batch updates, etc)
+				</section>
+				<section>
+					<h2>It's not so easy, but very fun</h2>
+				</section>
+				<section>
+					<h2>Further reading</h2>
+					<ul class="further-reading">
+						<li>http://c2.com/cgi/wiki?PairProgrammingPingPongPattern</li>
+						<li>http://oredev.org/videos/the-pair-programming-show</li>
+						<li>http://pragprog.com/magazines/2011-06/pair-programming-in-a-flash</li>
+						<li>http://martinfowler.com/bliki/PairProgrammingMisconceptions.html</li>
+					</ul>
+				</section>
+				<section>
+					<h1>TDD/BDD</h1>
+					<p>TDD = Test Driven Development</p>
+					<p>BDD = Behavior Driven Development</p>
+				</section>				
+				<section>
+					<h2>What it is</h2>
+					<p>It's a design process (with the test suite as a bi-product)</p>
+					<h2>What it's not</h2>
+					<p>It's not a process of writing absurd/silly test</p>
+				</section>
+				<section>
+					<h2>TDD vs BDD?</h2>
+				</section>					
+				<section>
+					<h2>Process</h2>
+					<img src="images/listingsID_148_0711_rdn_tb.gif">
+				</section>
+				<section>
+					<h2>* tests</h2>
+					<ul>
+						<li>Unit tests</li>
+						<li>Integration tests</li>
+						<li>Automated acceptance tests</li>
+				</section>
+				<section>
+					<h2>Enough of that, what can we actually use in our environment?</h2>
+					<ol>
+						<li class="fragment">Automated acceptance tests</li>
+						<li class="fragment">Page object pattern</li>
+					</ol>					
+				</section>
+				<section>
+					<h2>Further reading:</h2>
+					<ul>
+						<li>http://dannorth.net/introducing-bdd/</li>
+						<li>http://specificationbyexample.com/key_ideas.html</li>
+						<li>http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd</li>
+						<li>http://code.google.com/p/selenium/wiki/PageObjects</li>
+					</ul>
+				</section>
+				<section>
+					<h2>TextTest</h2>
+					<p>Can be used in environments where TDD/BDD is hard or "impossible"</p>
+					<img class="fragment" src="images/tkdiff.jpg">
+				</section>
+				<section>
+					<h2>Demo</h2>
+					<a href="examples/texttest.js">A simplified example of how it can look like</a>
+				</section>
+				<section>
+					<h3>Before refactoring</h3>
+					<pre>
+LOG: calculate price
+LOG: adjust price
+LOG: adjust price for VIP
+LOG: calculation done	
+					</pre>
+					<div class="fragment">
+						<h3>After refactoring</h3>
+						<pre>
+LOG: calculate price
+LOG: adjust price
+LOG: calculation done	
+						</pre>					
+						<p>Error: missing "LOG: adjust price for VIP"</p>
+						<p>We must have done something wrong...</p>
+					</div>
+				</section>
+				<section>
+					<h1>Coding</h1>
+					<img src="images/coding_mug.jpg">
+				</section>
+				<section>
+					<h2>What can we do in this environment?</h2>
+					<img src="images/9694511_s-1.jpg">
+				</section>
+				<section>
+					<h2>Guidelines</h2>
+					<h3>More important than you may think</h3>
+					<p>Establish coding guidelines and follow them</p>					
+				</section>
+				<section>
+					<h2>Some guidelines</h2>
+					<ul>
+						<li>https://code.google.com/p/google-styleguide/</li>
+						<li>http://isobar-idev.github.com/code-standards/</li>
+					</ul>			
+				</section>
+				<section>
+					<h2>Patterns and principles</h2>
+					<ul>
+						<li>Principles</li>
+						<li>Patterns</li>
+						<li>Code smells</li>
+					</ul>			
+				</section>
+				<section>
+					<h2>The ones we are going to talk about today is just a tip of the...</h2>
+					<img src="images/isberg.jpg">					
+				</section>
+				<section>
+					<h2><a href="http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod">S.O.L.I.D</a></h2>
+				</section>
+				<section>
+					<h2>Separation of Concerns</h2>
+					<img src="images/threelayers_separation.png">					
+				</section>
+				<section>
+					<blockquote>Is a design principle that comprises the process of separating a computer program into distinct features that overlap in functionality as little as possible</blockquote>	
+				</section>				
+				<section>
+					<h2>Single Responsibility Principle</h2>
+					<img src="images/SingleResponsibilityPrinciple.jpg">
+				</section>
+				<section>
+					<blockquote>States that every class should have a single responsibility, and that responsibility should be entirely encapsulated by the class</blockquote>	
+				</section>				
+				<section>
+					<h2>Feature envy</h2>
+					<img src="images/article-new_ehow_images_a07_v9_dn_signs-crush-jealous-800x800.jpg">
+				</section>
+				<section>
+					<blockquote>The whole point of objects is that they are a technique to package data with the processes used on that data. A classic [code] smell is a method that seems more interested in a class other than the one it is in. The most common focus of the envy is the data</blockquote>/Cunningham
+				</section>
+				<section>
+					<h2>Demo</h2>
+					<p>Can you find the envy part in <a href="examples/feature-envy.js">this code?</a></p>
+					<p>(this example will not work in your environment, but I think you can get the picture)</p>
+				</section>	
+				<section>				
+					<h2>State pattern</h2>
+					<img src="images/USA+state+map.jpg">
+				</section>
+				<section>				
+					<blockquote>This pattern is used in computer programming to represent the state of an object. This is a clean way for an object to partially change its type at runtime</blockquote>				
+				</section>
+				<section>				
+					<h2>Demo</h2>
+					<p><a href="examples/state-patten-before.js">Before</a> and <a href="examples/state-patten-after.js">after</a></p>					
+				</section>				
+				<section>
+					<h2>Further reading:</h2>
+					<ul>
+						<li>http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod</li>
+						<li>http://c2.com/cgi/wiki?DontRepeatYourself</li>
+						<li>http://en.wikipedia.org/wiki/Software_design_pattern</li>
+						<li>http://c2.com/cgi/wiki?CodeSmell</li>
+						<li>http://c2.com/cgi/wiki?DontRepeatYourself</li>
+					</ul>				
+				</section>
+				<section>
+					<h2>Code sharing (NOT review)</h2>
+					<img src="images/sally-code-review.png">
+				</section>
+				<section>
+					<h2>It's about</h2>
+					<ul>
+						<li>Overall knowledge sharing (about the code and the domain)</li>
+						<li>Learning from each others (coding, design, technologies, etc.)</li>
+						<li>Increase consistency in the code base</li>
+						<li>Point out good things</li>
+						<li>Get a collective code ownership</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Static code analysis</h2>
+					<img src="images/Customs+Border+Agents+Inspect+Valentine+Day+vsiN3J89efyl.jpg">
+				</section>
+				<section>
+					<h2>Before you commit, you could use tools like jshint and jslint</a></h2>
+				</section>
+				<section>
+					<img src="images/jshint.png">
+					<small>(available as command line/web gui)</small>
+				</section>
+				<section>
+					<h2>Further reading:</h2>
+					<ul>
+						<li>http://jshint.com</li>
+						<li>http://jslint.com</li>
+						<li>https://github.com/philbooth/complexityReport.js</li>
+					</ul>
+				</section>				
+				<section>
+					<h2>Continues integration</h2>
+					<img src="images/youbrokethebuild-small.jpg">
+				</section>
+				<section>
+					<h2>Some of the benefits</h2>
+					<ul>
+						<li>reduce risks</li>
+						<li>team code cohesion</li>
+						<li>deployable software</li>
+					</ul>
+				</section>
+				<section>					
+					<h2>On every commit you can</h2>
+					<ul>
+						<li>Build</li>
+						<li>Run tests</li>
+						<li>Run static code analysis</li>
+						<li>Deploy to a machine</li>
+						<li>Create documentation</li>
+						<li>...</li>
+					</ul>
+					<p></p>
+					<div class="fragment">
+						<h2>You can also</h2>
+						<ul>
+							<li>Create package for production</li>
+							<li>Tag and branch</li>
+							<li>...</li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<h2>Example of some CI products:</h2>
+					<ul>
+						<li>http://www.jetbrains.com/teamcity/</li>
+						<li>http://jenkins-ci.org/</li>
+					</ul>
+				</section>
+				<section>					
+					<h2>Example of some build languages:</h2>
+					<ul>
+						<li>http://gruntjs.com/</li>
+						<li>http://rake.rubyforge.org/</li>
+						<li>http://ant.apache.org/</li>
+					</ul>					
+				</section>				
+				<section>
+					<h2>Further reading:</h2>
+					<ul>
+						<li>http://martinfowler.com/articles/continuousIntegration.html</li>
+						<li>http://www.slideshare.net/drluckyspin/continuous-integration</li>
+						<li>http://continuousdelivery.com/</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Wrap up</h1>
+					<img src="images/180px-Bender.png">
+				</section>
+				<section>
+					<h2>Decide actions</h2>					
+				</section>
+				<section>
+					<h2>I use this everyday</h2>
+					<ul>
+						<li>http://jsbin.com</li>
+						<li>http://jspref.com</li>						
+						<li>http://pivotal.github.com/jasmine/</li>						
+						<li>http://phantomjs.org/</li>						
+					</ul>
+				</section>
+				<section>					
+					<h2>Books</h2>
+					<ul>
+						<li>Foundations of Programming (free e-book) by Karl Seguin</li>
+						<li>The Pragmatic Programmer by Andy Hunt</li>						
+						<li>Clean Code: A Handbook of Agile Software Craftsmanship by Robert C Martins</li>						
+						<li>The Clean Coder: A Code of Conduct for Professional Programmers by Robert C Martins</li>						
+					</ul>
+				</section>
+				<section>					
+					<h2>Questions?</h2>
+					<img src="images/a_610x408.jpg">
+				</section>
+				<section>
+					<h2>Thank you for your time!</h2>
+					<p>
+						
+					</p>
+					<small>
+						All images are copyrighted by their respective copyright owners:
+						<ul>
+							<li>Pair programming, http://devblog.point2.com/2010/02/19/pair-programming-anti-patterns/</li>
+							<li>TDD, http://reddevnews.com/articles/2007/11/01/testdriven-development-tdd.aspx</li>
+							<li>Hands tied, http://writeitsideways.com/should-writers-rethink-butt-in-chair-mentality/</li>
+							<li>Iceberg, http://writeitsideways.com/should-writers-rethink-butt-in-chair-mentality/</li>
+							<li>Single Responsibility Principle, http://el-aephau.blogspot.se/2012/05/massage-clients-rights-responsibilities_29.html</li>
+							<li>Separation of Concerns, http://www.sitepoint.com/simply-javascript/</li>
+							<li>Static code analysis, http://www.zimbio.com/pictures/Yl_RIJj-lMV/Customs+Border+Agents+Inspect+Valentine+Day/vsiN3J89efy/Lizbeth+Miranda</li>
+							<li>Continues integration, http://wtrocki.blogspot.se/</li>
+							<li>Gott &amp; blandat, http://grabbes.se/gott-blandat-till-filmen/</li>
+							<li>States, http://www.usborderlaw.com/uscis_doctors.html</li>
+							<li>Wrap up (bender), http://theinfosphere.org/Bender_Bending_Rodr%C3%ADguez</li>
+							<li>Coding Cup, http://www.zazzle.se/jag_skulle_kodifierar_ganska_muggen-168603648854109090</li>
+							<li>Questions, http://www.vulture.com/2012/06/10-open-questions-after-watching-prometheus.html</li>
+						</ul>
+					</small>
+				</section>
+			</div>
+		</div>
+
+		<script src="libs/reveal_js/lib/js/head.min.js"></script>
+		<script src="libs/reveal_js/js/reveal.min.js"></script>
+
+		<script>
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+				dependencies: [
+					{ src: 'libs/reveal_js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'libs/reveal_js/plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'libs/reveal_js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'libs/reveal_js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'libs/reveal_js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'libs/reveal_js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+			// Change to prevent reflow
+			var items = document.getElementsByTagName('li');
+			Array.prototype.forEach.call(items, function (item) {
+				var html = item.innerHTML;
+				if (html.indexOf('http') != -1) {
+					item.innerHTML = html.link(html);
+				}
+			})
+
+			var numberOfSections = document.getElementsByTagName('section').length;
+			var element = document.getElementById('number-of-sections');
+			element.innerHTML = numberOfSections + element.innerHTML;
+		</script>
+
+	</body>
+</html>
